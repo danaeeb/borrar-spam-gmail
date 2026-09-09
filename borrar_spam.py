@@ -32,6 +32,12 @@ mensajes = resultado.get("messages", [])
 print(f"Se han encontrado {len(mensajes)} correos candidatos.")
 
 for mensaje in mensajes:
-    print(f"Correo encontrado: {mensaje['id']}")
+    gmail.users().messages().trash(
+        userId="me",
+        id=mensaje["id"]
+    ).execute()
 
-print("PRUEBA TERMINADA. NO SE HA BORRADO NINGÚN CORREO.")
+    print(f"Correo enviado a la papelera: {mensaje['id']}")
+
+print("PROCESO TERMINADO.")
+   
